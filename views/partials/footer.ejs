@@ -1,0 +1,43 @@
+<footer id="main-footer" class="bg-dark text-light pt-4 pb-2 mt-5" style="display:none;">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- About Section -->
+      <div class="col-md-5 mb-3 mb-md-0 text-md-start text-center">
+        <h5 class="fw-bold mb-2">FashionDraw</h5>
+        <p class="mb-1 small">
+          FashionDraw is a creative platform to share, explore, and get inspired by fashion sketches and designs from artists around the world.
+        </p>
+      </div>
+      <!-- Navbar Links -->
+      <div class="col-md-4 mb-3 mb-md-0 text-center">
+        <a href="/" class="text-light text-decoration-none me-3">Explore</a>
+        <a href="/upload" class="text-light text-decoration-none me-3">Upload</a>
+        <a href="/login" class="text-light text-decoration-none me-3">Login</a>
+        <a href="/signup" class="text-light text-decoration-none">Sign Up</a>
+      </div>
+      <!-- Social Links -->
+      <div class="col-md-3 text-md-end text-center">
+        <a href="https://instagram.com/" target="_blank" class="text-light fs-4 me-3"><i class="bi bi-instagram"></i></a>
+        <a href="https://twitter.com/" target="_blank" class="text-light fs-4 me-3"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://facebook.com/" target="_blank" class="text-light fs-4"><i class="bi bi-facebook"></i></a>
+      </div>
+    </div>
+    <hr class="bg-secondary my-3">
+    <div class="text-center small text-secondary">
+      &copy; <%= new Date().getFullYear() %> FashionDraw. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Show footer only when scrolled to bottom
+  window.addEventListener('scroll', function() {
+    const footer = document.getElementById('main-footer');
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+      footer.style.display = 'block';
+    } else {
+      footer.style.display = 'none';
+    }
+  });
+</script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Drawing - FashonDraw</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #fde6f4 0%, #f9f6fb 100%);
+      scroll-behavior: smooth;
+    }
+    .edit-card {
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 32px rgba(34,34,59,0.08);
+      background: #fff;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 500px;
+      margin: 3rem auto;
+      animation: fadeIn 0.7s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .edit-card h2 {
+      font-weight: 700;
+      color: #22223b;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .form-label {
+      font-weight: 500;
+      color: #4a4e69;
+    }
+    .btn-dark {
+      background: #22223b;
+      border: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-dark:hover, .btn-dark:focus {
+      background: #4a4e69;
+      transform: scale(1.04);
+    }
+    .btn-outline-secondary {
+      border-radius: 2rem;
+    }
+    @media (max-width: 767.98px) {
+  .edit-card {
+    padding: 1.2rem 0.5rem;
+    margin: 1.2rem 0.2rem;
+    max-width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="edit-card">
+    <h2><i class="bi bi-pencil-square me-2"></i>Edit Drawing</h2>
+    <form action="/design/<%= design._id %>/edit" method="POST">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" value="<%= design.title %>" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Style</label>
+        <input type="text" class="form-control" name="style" value="<%= design.style %>" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tags <span class="text-muted">(comma separated)</span></label>
+        <input type="text" class="form-control" name="tags" value="<%= design.tags.join(', ') %>">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" name="description" rows="3" required><%= design.description %></textarea>
+      </div>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mt-4">
+  <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+    <i class="bi bi-save me-1"></i>Save Changes
+  </button>
+  <a href="/design/<%= design._id %>" class="btn btn-outline-secondary px-4 w-100 w-md-auto">Cancel</a>
+</div>
+    </form>
+  </div>
+</body>
+</html>

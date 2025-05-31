@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">FashionDraw <img id="navbar-logo" src="/fashion-design-dark.png" style="height:32px;"> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button id="theme-toggle" class="btn btn-outline-secondary ms-2" type="button">
+            <span id="theme-icon" class="bi bi-moon"></span>
+          </button>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/upload">Upload</a>
+        </li>
+
+        <!-- Add inside your navbar, e.g., after other links -->
+        <% if (!session.user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign Up</a>
+          </li>
+          <% } else { %>
+            <li class="nav-item">
+              <span class="nav-link">Hello, <%= session.user.username %></span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <% } %>
+              <!-- Future: Login/Logout/Register links -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<script>
+  // Check for saved theme in localStorage
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('bg-dark', 'text-light');
+    document.querySelector('.navbar').classList.remove('navbar-dark', 'bg-dark');
+    document.querySelector('.navbar').classList.add('navbar-light', 'bg-light');
+  }
+
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    document.body.classList.toggle('bg-dark');
+    document.body.classList.toggle('text-light');
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('navbar-dark');
+    navbar.classList.toggle('bg-dark');
+    navbar.classList.toggle('navbar-light');
+    navbar.classList.toggle('bg-light');
+
+    // Save preference
+    if (document.body.classList.contains('bg-dark')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+
+  function updateLogo() {
+  const logo = document.getElementById('navbar-logo');
+  if (document.body.classList.contains('bg-dark')) {
+    logo.src = '/fashion-design-light.png'; // white/bright logo for dark mode
+  } else {
+    logo.src = '/fashion-design-dark.png'; // dark logo for light mode
+  }
+}
+
+// Call on load and on toggle
+updateLogo();
+document.getElementById('theme-toggle').addEventListener('click', updateLogo);
+</script>

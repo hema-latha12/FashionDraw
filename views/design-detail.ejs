@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= design.title %> - FashonDraw</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    .comment-box { background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .comment-user { font-weight: 600; color: #343a40; }
+    .comment-date { font-size: 0.9em; color: #888; }
+    .comment-form textarea { resize: none; }
+  </style>
+
+
+  <style>
+    body{
+      background: linear-gradient(135deg, #fde6f4 0%, #f9f6fb 100%);
+    }
+    /* ...existing styles... */
+    .detail-img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      background: #f8f9fa;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+  </style>
+</head>
+<body> 
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-6 col-12 col-sm-6 col-md-4 mb-4">
+        <img src="/uploads/<%= design.image %>" class="img-fluid detail-img" alt="drawing">
+      </div>
+      <div class="col-md-6">
+        <h2><%= design.title %></h2>
+        <span class="badge bg-secondary mb-2"><%= design.style %></span>
+        <p class="text-muted">Posted by <strong><%= design.uploadedBy %></strong></p>
+        <p>
+          <% if (design.tags && design.tags.length > 0) { %>
+            <% design.tags.forEach(tag => { %>
+              <span class="badge bg-light text-dark border me-1">#<%= tag %></span>
+            <% }) %>
+          <% } %>
+        </p>
+        <p><strong>Likes:</strong> <%= design.likes %></p>
+        <p class="mt-4"><strong>Description:</strong> <%= design.description %></p>
+        <a href="/" class="btn btn-outline-secondary mt-3">Back to Explore</a>
+      </div>
+    </div>
+
+
+    <% if (session.user && session.user.username === design.uploadedBy) { %>
+  <a href="/design/<%= design._id %>/edit" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+  <form action="/design/<%= design._id %>/delete" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+  </form>
+<% } %>
+
+    <!-- Comments Section -->
+    <div class="row form-ka mt-5">
+      <div class="col-md-8 mx-auto">
+        <h4 class="mb-3">Comments</h4>
+        <% if (design.comments && design.comments.length > 0) { %>
+          <% design.comments.slice().reverse().forEach(comment => { %>
+            <div class="comment-box">
+              <div class="d-flex justify-content-between">
+                <span class="comment-user"><%= comment.user %></span>
+                <span class="comment-date"><%= comment.createdAt.toLocaleString() %></span>
+              </div>
+              <div class="mt-1"><%= comment.text %></div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p class="text-muted">No comments yet. Be the first to comment!</p>
+        <% } %>
+
+        <form class="comment-form mt-4 comment-input-bar" action="/design/<%= design._id %>/comment" method="POST">
+          <div class="mb-2">
+            <textarea class="form-control" name="text" rows="2" placeholder="Add a comment..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark ms-2">
+                <i class="bi bi-send"></i>
+              </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Drawing - FashonDraw</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    body {
+      /* background: #f8f9fa; */
+  background: linear-gradient(135deg, #fde6f4 0%, #f9f6fb 100%);
+    }
+    .upload-card {
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 32px rgba(34,34,59,0.08);
+      background: #fff;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 500px;
+      margin: 3rem auto;
+      animation: fadeIn 0.7s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .upload-card h2 {
+      font-weight: 700;
+      color: #22223b;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .form-label {
+      font-weight: 500;
+      color: #4a4e69;
+    }
+    .btn-dark {
+      background: #22223b;
+      border: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-dark:hover, .btn-dark:focus {
+      background: #4a4e69;
+      transform: scale(1.04);
+    }
+    .form-select, .form-control {
+      border-radius: 1.2rem;
+    }
+  </style>
+
+
+
+
+</head>
+<body>
+
+<!-- <div class="alert alert-info text-center mb-4 rounded-pill shadow-sm" style="max-width: 500px; margin: 2rem auto 0 auto;">
+  <i class="bi bi-lightbulb me-2"></i>
+  Share your unique fashion sketch and inspire others!
+</div> -->
+
+
+<div class="d-flex justify-content-center align-items-center gap-3 mb-4 mt-3" style="font-size:1.1rem;">
+  <span class="badge bg-secondary rounded-pill px-3 py-2">1. Choose Image</span>
+  <i class="bi bi-arrow-right"></i>
+  <span class="badge bg-secondary rounded-pill px-3 py-2">2. Add Details</span>
+  <i class="bi bi-arrow-right"></i>
+  <span class="badge bg-secondary rounded-pill px-3 py-2">3. Upload</span>
+</div>
+
+
+
+
+
+  <div class="upload-card">
+    <h2 class="fw-bold mb-4 text-center" style="letter-spacing:1px;"><i class="bi bi-cloud-arrow-up me-2"></i>Share Your Sketch!</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="image" class="form-label">Drawing Image</label>
+        <input type="file" class="form-control" name="image" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Style</label>
+
+        <select class="form-select" name="style" required>
+        <option>Ethnic Wear</option>
+        <option>Western Dresses</option>
+        <option>Menswear</option>
+        <option>Womenswear</option>
+        <option>Kidswear</option>
+        <option>Casual</option>
+        <option>Formal</option>
+        <option>Party Wear</option>
+        <option>Traditional</option>
+        <option>Streetwear</option>
+        <option>Sportswear</option>
+        <option>Fusion</option>
+        <option>Vintage</option>
+      </select>
+
+      </div>
+      <div class="mb-3">
+        <label for="tags" class="form-label">Tags <span class="text-muted">(comma separated)</span></label>
+        <input type="text" class="form-control" id="tags" name="tags" placeholder="e.g. Boho, Casual, Retro">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" name="description" rows="3" placeholder="Describe your drawing..." required></textarea>
+      </div>
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-dark btn-lg">
+          <i class="bi bi-upload me-1"></i>Upload Drawing
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
